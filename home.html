@@ -2,92 +2,97 @@
     <head>
         <title>Online Grocery Shopping</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <link rel="icon" href="/images/icon.svg" type="image/png" />
+        <link rel="icon" href="/images/icon.png" type="image/png" />
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
         />
-        <script src="index.js"></script>
     </head>
     <body>
         <div class="load-div">
             <div class="loading flex-column"></div>
         </div>
-        <div class="d-flex menu">
-            <div class="d-flex flex-column navbar">
-                <div class="d-flex flex-row navbar1">
-                    <div class="icon">
-                        <img
-                            src="/images/bblogo.png"
-                            style="width: 6rem; height: 100%"
-                        />
-                    </div>
-                    <div class="search d-flex">
-                        <input
-                            type="search"
-                            id="search-input"
-                            class="search-input"
-                            placeholder="Search for Products..."
-                        />
-                        <img
-                            class="search-logo flex"
-                            src="/images/search.png"
-                        />
-                    </div>
-                    <div class="location d-flex">
-                        <button class="trigger location-btn" type="button">
-                            Select Location</button
-                        ><img
-                            class="location-logo"
-                            src="/images/location.svg"
-                        />
-                    </div>
-                    <div class="flex-column login">
-                        <button class="trigger login-btn" type="button">
-                            Login/Sign Up
-                        </button>
-                    </div>
-                    <div class="cart flex-column">
-                        <button class="trigger cart-logo" type="button">
-                            <img src="/images/basket.svg" />
-                        </button>
-                    </div>
-                </div>
-                <div class="d-flex flex-row navbar2">
-                    <div class="category d-flex">
-                        <button class="trigger d-flex category-btn">
-                            Category
-                        </button>
-                        <p>Shop by</p>
-                    </div>
-                    <div class="text-center container">
-                        <div class="menu-list row">
-                            <button class="col pro-item trigger">
-                                Exotic fruits & V..
+        <div class="menu-div">
+            <div class="d-flex menu" id="menu">
+                <div class="d-flex flex-column navbar">
+                    <div class="d-flex flex-row navbar1">
+                        <div class="icon">
+                            <img
+                                src="/images/bblogo.png"
+                                style="width: 6rem; height: 100%"
+                            />
+                        </div>
+                        <div class="search d-flex">
+                            <input
+                                type="search"
+                                id="search-input"
+                                class="search-input"
+                                placeholder="Search for Products..."
+                            />
+                            <img
+                                class="search-logo flex"
+                                src="/images/search.png"
+                            />
+                        </div>
+                        <div class="location d-flex">
+                            <button class="trigger location-btn" type="button">
+                                Select Location</button
+                            ><img
+                                class="location-logo"
+                                src="/images/location.png"
+                            />
+                        </div>
+                        <div class="flex-column login">
+                            <button class="trigger login-btn" type="button">
+                                Login/Sign Up
                             </button>
-                            <button class="col pro-item trigger">Tea</button>
-                            <button class="col pro-item trigger">Ghee</button>
-                            <button class="col pro-item trigger">
-                                Nandini
+                        </div>
+                        <div class="cart flex-column">
+                            <button class="trigger cart-logo" type="button">
+                                <img src="/images/basket.svg" />
                             </button>
-                            <button class="col pro-item trigger">>></button>
                         </div>
                     </div>
-                    <div
-                        style="
-                            display: flex;
-                            column-gap: 1rem;
-                            align-items: center;
-                            height: 100%;
-                        "
-                    >
-                        <h2 style="height: 100%">|</h2>
-                        <button class="navbar2-btn trigger">
-                            <img src="images/Smart_basket-250124-1.png" />
-                        </button>
-                        <button class="navbar2-btn trigger">
-                            <img src="images/offers.png" />
-                        </button>
+                    <div class="d-flex flex-row navbar2">
+                        <div class="category d-flex">
+                            <button class="d-flex category-btn">
+                                Category
+                            </button>
+                            <p>Shop by</p>
+                        </div>
+                        <div class="text-center container">
+                            <div class="menu-list row">
+                                <button class="col pro-item trigger">
+                                    Exotic fruits & V..
+                                </button>
+                                <button class="col pro-item trigger">
+                                    Tea
+                                </button>
+                                <button class="col pro-item trigger">
+                                    Ghee
+                                </button>
+                                <button class="col pro-item trigger">
+                                    Nandini
+                                </button>
+                                <button class="col pro-item">>></button>
+                            </div>
+                        </div>
+                        <div
+                            style="
+                                display: flex;
+                                column-gap: 1rem;
+                                align-items: center;
+                                height: 100%;
+                            "
+                        >
+                            <h2 style="height: 100%">|</h2>
+                            <button class="navbar2-btn trigger">
+                                <img src="images/Smart_basket-250124-1.png" />
+                            </button>
+                            <button class="navbar2-btn trigger">
+                                <img src="images/offers.png" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,6 +143,7 @@
                     </h5>
                     <div class="smb d-flex">
                         <a
+                            class="trigger"
                             style="
                                 color: #7e7b84;
                                 text-decoration: underline;
@@ -149,19 +155,136 @@
                         >
                             View All
                         </a>
-                        <button class="trigger"><</button>
-                        <button class="trigger">></button>
+                        <button class="prev-btn">&lt;</button>
+                        <button class="next-btn">&gt;</button>
                     </div>
+                </div>
+                <div class="basket-cntr-main">
+                    <!-- item box here -->
                 </div>
             </div>
             <br />
             <div class="cntr cntr2 d-flex flex-column">
-                <h4 class="flex-row">Bank Offers</h4>
-                <div class="d-flex flex-row b-offers">
-                    <img class="b-offer trigger" src="/images/b1.jpg" />
-                    <img class="b-offer trigger" src="/images/b2.jpg" />
-                    <img class="b-offer trigger" src="/images/b3.jpg" />
-                    <img class="b-offer trigger" src="/images/b4.jpg" />
+                <h4 class="flex-row"><b>Bank Offers</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/b1.jpg" />
+                    <img class="offer-eff trigger" src="/images/b2.jpg" />
+                    <img class="offer-eff trigger" src="/images/b3.jpg" />
+                    <img class="offer-eff trigger" src="/images/b4.jpg" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Top Offers</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/t1.jpg" />
+                    <img class="offer-eff trigger" src="/images/t2.jpg" />
+                    <img class="offer-eff trigger" src="/images/t3.jpg" />
+                    <img class="offer-eff trigger" src="/images/t4.jpg" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Fruits and Vegetables</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/fv1.jpg" />
+                    <img class="offer-eff trigger" src="/images/fv2.png" />
+                    <img class="offer-eff trigger" src="/images/fv3.jpg" />
+                    <img class="offer-eff trigger" src="/images/fv4.jpg" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Your Daily Staples</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/ds1.jpg" />
+                    <img class="offer-eff trigger" src="/images/ds2.jpg" />
+                    <img class="offer-eff trigger" src="/images/ds3.jpg" />
+                    <img class="offer-eff trigger" src="/images/ds3.jpg" />
+                    <img class="offer-eff trigger" src="/images/ds3.jpg" />
+                    <img class="offer-eff trigger" src="/images/ds4.jpg" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Beverages</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/bev1.png" />
+                    <img class="offer-eff trigger" src="/images/bev2.png" />
+                    <img class="offer-eff trigger" src="/images/bev3.png" />
+                    <img class="offer-eff trigger" src="/images/bev4.png" />
+                    <img class="offer-eff trigger" src="/images/bev5.png" />
+                    <img class="offer-eff trigger" src="/images/bev6.png" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Snacks Store</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/ss5.png" />
+                    <img class="offer-eff trigger" src="/images/ss6.png" />
+                    <img class="offer-eff trigger" src="/images/ss7.png" />
+                    <img class="offer-eff trigger" src="/images/ss8.png" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Cleaning & Household</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/ch1.jpg" />
+                    <img class="offer-eff trigger" src="/images/ch2.jpg" />
+                    <img class="offer-eff trigger" src="/images/ch3.jpg" />
+                    <img class="offer-eff trigger" src="/images/ch4.jpg" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Beauty and Hygiene</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/bh1.png" />
+                    <img class="offer-eff trigger" src="/images/bh2.png" />
+                    <img class="offer-eff trigger" src="/images/bh3.png" />
+                    <img class="offer-eff trigger" src="/images/bh4.png" />
+                    <img class="offer-eff trigger" src="/images/bh5.png" />
+                    <img class="offer-eff trigger" src="/images/bh6.png" />
+                </div>
+                <br />
+                <h4 class="flex-row"><b>Home and Kitchen</b></h4>
+                <div class="d-flex flex-row mini-offers">
+                    <img class="offer-eff trigger" src="/images/hk1.png" />
+                    <img class="offer-eff trigger" src="/images/hk2.png" />
+                    <img class="offer-eff trigger" src="/images/hk3.png" />
+                    <img class="offer-eff trigger" src="/images/hk4.png" />
+                    <img class="offer-eff trigger" src="/images/hk5.png" />
+                    <img class="offer-eff trigger" src="/images/hk6.png" />
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="cntr">
+                <div class="carouseldiv">
+                    <div class="carousel-main">
+                        <img
+                            src="/images/carousal1.png"
+                            alt="Image 1"
+                            class="carousel-item active"
+                        />
+                        <img
+                            src="/images/carousal2.png"
+                            alt="Image 2"
+                            class="carousel-item"
+                        />
+                        <img
+                            src="/images/carousal3.png"
+                            alt="Image 3"
+                            class="carousel-item"
+                        />
+                        <img
+                            src="/images/carousal4.png"
+                            alt="Image 4"
+                            class="carousel-item"
+                        />
+                    </div>
+                    <div class="carousel-btn">
+                        <button class="prev-button">
+                            <img
+                                class="carousel-arrow"
+                                src="/images/leftarrow.png"
+                            />
+                        </button>
+                        <button class="next-button">
+                            <img
+                                class="carousel-arrow"
+                                src="/images/rightarrow.png"
+                            />
+                        </button>
+                    </div>
                 </div>
             </div>
             <br />
@@ -214,8 +337,9 @@
             </div>
         </div>
         <br />
+        <!-- footer -->
         <div class="bg">
-            <div class="container bg" id="footer">
+            <div class="bg" id="footer">
                 <div class=""></div>
                 <br />
                 <div class="p-3 black cities" style="font-weight: 400">
@@ -596,10 +720,15 @@
                     align-items: center;
                 "
             >
-                <div class="p-3" style="width: 73%">
+                <div class="p-3" style="width: 83%">
                     Cloned by MOGESH G , Feb-2024
                 </div>
             </div>
         </div>
+        <script src="index.js"></script>
+        <script
+            src="https://kit.fontawesome.com/4da4e7a2c7.js"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>
