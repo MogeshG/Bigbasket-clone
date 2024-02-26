@@ -25,28 +25,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     });
 
-    document
-        .getElementById("search-input")
-        .addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                clearInterval(window.x);
-                greenLine.classList.remove("shrink");
-                window.x = setInterval(func, 700);
-                function func() {
-                    greenLine.classList.toggle("shrink");
-                }
-                setTimeout(() => {
-                    clearInterval(window.x);
-                    greenLine.classList.remove("shrink");
-                }, 4200);
-            }
+    //add items button
+    const addItemsButton = document.querySelectorAll(".add-items");
+    const additionalButtonContainer =
+        document.querySelectorAll(".count-container");
+    addItemsButton.forEach((btn, index) => {
+        btn.addEventListener("click", () => {
+            btn.style.display = "none";
+            additionalButtonContainer[index].classList.remove(
+                "additional-button-container"
+            );
+            additionalButtonContainer[index].classList.add(
+                "additional-button-container-new"
+            );
         });
-
-    //new-page reload
-    document.querySelector(".new-page").addEventListener("click", () => {
-        setTimeout(() => {
-            window.location.href = "http://127.0.0.1:5500/atta.html";
-        }, 3000);
     });
 
     //bookmark
@@ -62,22 +54,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 btn.classList.add("fa-regular");
             }
             clicked = !clicked;
-        });
-    });
-
-    //add items button
-    const addItemsButton = document.querySelectorAll(".add-items");
-    const additionalButtonContainer =
-        document.querySelectorAll(".count-container");
-    addItemsButton.forEach((btn, index) => {
-        btn.addEventListener("click", () => {
-            btn.style.display = "none";
-            additionalButtonContainer[index].classList.remove(
-                "additional-button-container"
-            );
-            additionalButtonContainer[index].classList.add(
-                "additional-button-container-new"
-            );
         });
     });
 
@@ -106,6 +82,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 1 + parseInt(countOfItem[index].innerHTML);
         });
     });
+
+    document
+        .getElementById("search-input")
+        .addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                clearInterval(window.x);
+                greenLine.classList.remove("shrink");
+                window.x = setInterval(func, 700);
+                function func() {
+                    greenLine.classList.toggle("shrink");
+                }
+                setTimeout(() => {
+                    clearInterval(window.x);
+                    greenLine.classList.remove("shrink");
+                }, 4200);
+            }
+        });
 
     //carousel button opacity
     const carouselButton = document.querySelectorAll(".carousel-arrow");
@@ -149,6 +142,105 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
         moveToIndex(x);
     }, 2000);
+
+    //
+
+    //Filter eye image
+    document.querySelector(".info-nav-filter").addEventListener("click", () => {
+        if (
+            document
+                .querySelector(".info-nav-filter i")
+                .classList.contains("fa-eye")
+        ) {
+            document
+                .querySelector(".info-nav-filter i")
+                .classList.remove("fa-eye");
+            document
+                .querySelector(".info-nav-filter i")
+                .classList.add("fa-eye-slash");
+
+            document.querySelector(".info-nav-filter").style.color = "";
+            document.querySelector(".info-nav-filter").style.backgroundColor =
+                "";
+
+            document.querySelector(".info-nav-filter p").innerHTML =
+                "Hide Filter";
+
+            document.querySelector(".filter-menu").style.display = "";
+            document.querySelector(".product-menu").style.width = "";
+        } else {
+            document
+                .querySelector(".info-nav-filter i")
+                .classList.remove("fa-eye-slash");
+            document
+                .querySelector(".info-nav-filter i")
+                .classList.add("fa-eye");
+
+            document.querySelector(".info-nav-filter").style.color = "#ffffff";
+            document.querySelector(".info-nav-filter").style.backgroundColor =
+                "#303030";
+
+            document.querySelector(".filter-menu").style.display = "none";
+            document.querySelector(".product-menu").style.width = "100%";
+            document.querySelector(".info-nav-filter p").innerHTML =
+                "Show Filter";
+        }
+    });
+    //supersaver button toggle
+    let clicked = 0;
+    const supersaverButton = document.querySelector(".supersaver-button");
+    supersaverButton.addEventListener("click", () => {
+        if (!clicked) {
+            supersaverButton.innerHTML = `
+        <path
+            fill="#f21c1c"
+            d="M192 64C86 64 0 150 0 256S86 448 192 448H384c106 0 192-86 192-192s-86-192-192-192H192zm192 96a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"
+        />`;
+        } else {
+            supersaverButton.innerHTML = `<path
+            d="M384 128c70.7 0 128 57.3 128 128s-57.3 128-128 128H192c-70.7 0-128-57.3-128-128s57.3-128 128-128H384zM576 256c0-106-86-192-192-192H192C86 64 0 150 0 256S86 448 192 448H384c106 0 192-86 192-192zM192 352a96 96 0 1 0 0-192 96 96 0 1 0 0 192z"
+        />`;
+        }
+        clicked = !clicked;
+    });
+
+    //filter menu scroll
+    // window.addEventListener("scroll", () => {
+    //     const scrollY = window.scrollY;
+    //     if (document.querySelector(".filter-menu").offsetTop <= scrollY)
+    //         document.querySelector(".filter-menu").style.position = "fixed";
+    //     else document.querySelector(".filter-menu").style.position = "";
+    // });
+
+    //filter-container-toggle
+    const filterContainerButton = document.querySelectorAll(
+        ".filter-container-button"
+    );
+    const filterContainer = document.querySelectorAll(".filter-container");
+    const filterContainerButtonArrow = document.querySelectorAll(
+        ".filter-container-button i"
+    );
+    filterContainerButton.forEach((btn, index) => {
+        let clicked = 0;
+        btn.addEventListener("click", () => {
+            if (!clicked) {
+                filterContainer[index].style.display = "none";
+                filterContainerButtonArrow[index].classList.remove(
+                    "fa-angle-up"
+                );
+                filterContainerButtonArrow[index].classList.add(
+                    "fa-angle-down"
+                );
+            } else {
+                filterContainer[index].style.display = "block";
+                filterContainerButtonArrow[index].classList.remove(
+                    "fa-angle-down"
+                );
+                filterContainerButtonArrow[index].classList.add("fa-angle-up");
+            }
+            clicked = !clicked;
+        });
+    });
 
     // JavaScript to hide menu while scrolling downwards
     let lastScrollTop = 0;
@@ -207,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 if (val != index) {
                     setTimeout(() => {
                         basketItemScrollContainer[val].style.display = "none";
-                    }, 300);
+                    }, 500);
                 }
             });
             basketItemScrollContainer[index].style.display = "block";
@@ -215,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             let div = basketItem[index];
             let supersaver = supersaverAnimation[index];
             div.scrollTo({
-                top: 1000,
+                top: 5000,
                 behavior: "smooth",
             });
             supersaver.classList.add("supersaverAnimationWidth");
@@ -442,7 +534,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             firstElements();
         });
     });
-    console.log(inx);
     categorySub1Item.forEach((item, index) => {
         item.addEventListener("mouseover", () => {
             let sub2data = sub2Items[inx][index];
@@ -450,287 +541,205 @@ document.addEventListener("DOMContentLoaded", function (event) {
             firstElements();
         });
     });
+
+    //Selective GetIt Button
+    (() => {
+        const basketItemOfferButton = document.querySelectorAll(
+            ".basket-item-offer-button"
+        );
+        let getIt = [1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1];
+        basketItemOfferButton.forEach((btn, index) => {
+            if (getIt[index] === 0) btn.style.visibility = "hidden";
+        });
+    })();
 });
 
-// Smart Basket Container
-const basketContainer = document.querySelector(".basket-cntr-main");
+// Products insertion
 (() => {
-    populateBasketContainer();
+    insertProducts();
 })();
 
-function populateBasketContainer() {
-    let basketSubDiv = "";
-    basketContainer.innerHTML = " ";
-    for (let i = 0; i < 8; i++) {
-        basketSubDiv += loadBasketItem(i);
+function insertProducts() {
+    const productMenu = document.querySelector(".product-menu");
+
+    let productMenuData = "";
+    for (let i = 0; i < 12; i++) {
+        productMenuData += productItem(i);
     }
-    basketContainer.innerHTML += basketSubDiv;
+    productMenu.innerHTML += productMenuData;
 }
 
-function loadBasketItem(i) {
+function productItem(i) {
     let name = [
-        "Capsicum Green (Loose)",
-        "Carrot Orange (Loose)",
-        "Cauliflower",
-        "Corainder leaves",
-        "Cucumber",
-        "Ladies Finger (Loose)",
-        "Tomato (Loose)",
-        "Beans - Haricot (Loose)",
+        "Atta/Gogihittu - Whole Wheat",
+        "Select Sharbati Atta",
+        "Sooji Ordinary/Bombay Rava",
+        "Atta with Multigrains",
+        "Bansi Sooji",
+        "Rice Flour",
+        "Fine Besan/Kadale Hittu",
+        "Superior-Mp-Sharbati-Atta",
+        "Maida",
+        "Chiroti/Baik Sooji",
+        "Chakki Fresh Atta",
+        "Organic Whole Wheat Atta",
     ];
     let quantity = [
-        "1Kg",
-        "1Kg",
-        "1pc - (approx. 400 to 600g)",
-        "1Kg",
-        "10Kg",
-        "5Kg",
-        "1Kg",
-        "1Kg",
+        "5kg",
+        "10kg",
+        "5x1 kg - Multipack",
+        "10kg",
+        "500g - Pouch",
+        "500g - Pouch",
+        "1kg",
+        "10kg - Pouch",
+        "5x1 kg - Multipack",
+        "500 g - Pouch",
+        "1kg - Pouch",
+        "1kg",
     ];
-    let discount = [51, 39, 42, 55, 41, 47, 27, 40];
-    let price = [50, 66, 25.5, 45.5, 49, 89.25, 25, 58];
-    const basketItemHtml = `<div class="basket-item-container"><div class="basket-item">
-    <div class="basket-item-image-container">
-        <img
-            src="./images/sb${i + 1}.jpg"
-            alt="basket Item Image"
-            class="basket-item-image"
-        />
-        <p class="basket-item-discount">${discount[i]}% OFF</p>
-        <div class="basket-item-image-type-cntr">
-            <div class="basket-item-image-type"></div>
-        </div>
-    </div>
-    <div class="basket-item-detail-container">
-        <p class="basket-item-detail-brand">Fresho</p>
-        <p class="basket-item-detail-name">${name[i]}</p>
-        <select
-            name="basket-item-quantity"
-            id="basket-item-detail-quantity-select"
-            class="basket-item-detail-quantity"
-        >
-            <option class="basket-item-quantity-select-option">${quantity[i]}
-                <!-- <div class="basket-item-quantity-value-cntr">
-            <p class="basket-item-quantity-value">250g</p>
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <div class="basket-item-quantity-detail">
-                        <div class="basket-item-quantity-discount">${
-                            discount[i]
-                        }% OFF</div>
-                        <p class="basket-item-quantity-price">${price[i]}</p>
-                        <p class="basket-item-quantity-discount-price">${parseFloat(
-                            (price[i] * 100) / (100 - discount[i])
-                        ).toFixed(2)}</p>
-                        <button class="basket-item-quantity-button">Add</button>
-                        </div> -->
-            </option>
-        </select>
-        <div class="basket-item-detail-price-cntr d-flex flex-row" style="align-items:center;">
-        <p class="basket-item-quantity-price" style="padding:0.2rem;margin:0">&#8377;${
-            price[i]
-        }</p>
-        <p class="basket-item-quantity-discount-price" style="margin:0">&#8377;${parseFloat(
-            (price[i] * 100) / (100 - discount[i])
-        ).toFixed(2)}</p>
-        </div>
-    </div>
-    <div class="basket-item-offer-button">
-        <i></i>
-        <p>Get it for &#8377;${price[i] - 100 / 20}</p>
-    </div>
-    <br />
-    <div class="basket-item-scroll-detail">
-        <p>Fresho</p>
-        <p>${name[i]}</p>
-        <div class="basket-item-scroll-price-container d-flex align-items-center" >
-        <p class="basket-item-quantity-price" style="padding:0.2rem;margin:0">&#8377;${
-            price[i]
-        }</p>
-        <p class="basket-item-quantity-discount-price" style="margin:0">&#8377;${parseFloat(
-            (price[i] * 100) / (100 - discount[i])
-        ).toFixed(2)}</p>
-        </div>
-        <div class="basket-item-scroll-container">
-            <div class="basket-item-scroll-function">
-                <img
-                    class="basket-item-scroll-container-img"
-                    src="./images/getIt.png"
-                    alt=""
-                    style="width: 30px; height: 30px"
-                />
-                <button class="basket-item-scroll-container-back">X</button>
-            </div>
-            <div class="supersaverAnimation"><p>supersaver!</p></div>
-            <div class="getItem">
-                <p><b>Get it for &#8377;${price[i] - 100 / 20}</b></p>
-                <p>
-                    Buy items worth <b>&#8377;1500</b> to get this product at a
-                    supersaver price for <b>&#8377;${price[i] - 100 / 20}</b>
-                </p>
-            </div>
-        </div>
-    </div>
-    </div>
-    <div class="item-count-button">
-        <button class="wishlist">
-            <i
-                class="fa-regular fa-bookmark"
-                style="color: #010409"
-            ></i>
-        </button>
-        <div class="add-items-button-container">
-            <button class="add-items">Add</button>
-            <div class="count-container additional-button-container">
-                <button class="remove-product">-</button>
-                <p class="count-of-item">1</p>
-                <button class="add-product">+</button>
-            </div>
-        </div>
-    </div>
-</div>
-`;
-    return basketItemHtml;
-}
-
-//Best Selller Container
-const bestSellerContainer = document.querySelector(".best-seller-container");
-
-(() => {
-    populateBestSellerContainer();
-})();
-
-function populateBestSellerContainer() {
-    let bestSellerDiv = " ";
-    bestSellerContainer.innerHTML = " ";
-    for (let i = 0; i < 8; i++) {
-        bestSellerDiv += bestSeller(i);
-    }
-    bestSellerContainer.innerHTML += bestSellerDiv;
-}
-
-function bestSeller(i) {
     let brand = [
-        "Littles",
-        "Bodyguard",
-        "Dabur",
-        "MyGlamm",
-        "Bigbasket",
-        "Bigbasket",
-        "Littles",
+        "Aashirvaad",
+        "Aashirvaad",
+        "BB Royal",
+        "Aashirvaad",
+        "BB Royal",
+        "BB Royal",
+        "Tata Sampann",
+        "BB Royal",
+        "BB Royal",
+        "BB Royal",
+        "Fortune",
+        "Aashirvaad",
     ];
-    let name = [
-        "Baby Wipes - With Aleo",
-        "Baby Wipes - Sea Breeze, No Paraben, Double",
-        "Baby Wipes - Fresh , No Paraben, Double",
-        "Baby Wipes - Cherry Blossem, No Paraben, Double",
-        "Baby Wipes With Lid - Added With Aleo Vera,",
-        "Bab Wet Wipes Vitamin E & Aleo Vera, 72",
-        "Baby Wipes With Moisture Lock Cap ",
-        "Wipeout Baby Safety Wipes",
+    let discount = [18, 16, 30, 16, 16, 17, 26, 21, 29, 9, 33, 13];
+    let price = [
+        240.34, 504, 295, 546, 32, 25, 111, 514.58, 230.55, 30, 57.36, 65,
     ];
-    let quantity = [
-        "72 Pcs - (Pack of 2)",
-        "3x80 Pcs - Multipack",
-        "2x80 Pcs - Multipack",
-        "2x80 Pcs - Multipack",
-        "80 Pcs",
-        "72 Pulls - (Pack of 2)",
-        "480 Wipes - (Pack of 6)",
-        "80 Pulls",
-    ];
-    let discount = [52, 47, 47, 47, 61, 22, 28, 35];
-    let price = [284.5, 315, 210, 210, 86, 195, 859.68, 194.35];
-
-    // let discounted_price = [
-    //     102.74, 108.22, 43.84, 100, 750, 168.25, 34.25, 97.26,
-    // ];
-
-    const bestSellerHTML = `<div class="basket-item-container"><div class="basket-item">
-    <div class="basket-item-image-container">
-        <img
-            src="./images/bs${i + 1}.jpg"
-            alt="basket Item Image"
-            class="basket-item-image"
-        />
-        <p class="basket-item-discount">${discount[i]}% OFF</p>
-        <div class="basket-item-image-type-cntr">
-            <div class="basket-item-image-type"></div>
-        </div>
-    </div>
-    <div class="basket-item-detail-container">
-        <p class="basket-item-detail-brand">${brand[i]}</p>
-        <p class="basket-item-detail-name">${name[i]}</p>
-        <select
-            name="basket-item-quantity"
-            id="basket-item-detail-quantity-select"
-            class="basket-item-detail-quantity"
-        >
-            <option value="250g" class="basket-item-quantity-select-option">${
-                quantity[i]
-            }
-                <!-- <div class="basket-item-quantity-value-cntr">
-            <p class="basket-item-quantity-value">250g</p>
-                        <i class="fa-solid fa-check"></i>
-                    </div>
-                    <div class="basket-item-quantity-detail">
-                        <div class="basket-item-quantity-discount">${
-                            discount[i]
-                        }% OFF</div>
-                        <p class="basket-item-quantity-price">${price[i]}</p>
-                        <p class="basket-item-quantity-discount-price">${parseFloat(
-                            (price[i] * 100) / (100 - discount[i])
-                        ).toFixed(2)}</p>
-                        <button class="basket-item-quantity-button">Add</button>
-                        </div> -->
-            </option>
-        </select>
-        <div class="basket-item-detail-price-cntr d-flex flex-row" style="align-items:center;">
-        <p class="basket-item-quantity-price" style="padding:0.2rem;margin:0">&#8377;${
-            price[i]
-        }</p>
-        <p class="basket-item-quantity-discount-price" style="margin:0">&#8377;${parseFloat(
-            (price[i] * 100) / (100 - discount[i])
-        ).toFixed(2)}</p>
-        </div>
-    </div>
-    <div class="basket-item-offer-button">
-        <i></i>
-        <p>Get it for &#8377;${price[i] - 100 / 20}</p>
-    </div>
-    <br />
-    <div class="basket-item-scroll-detail">
-        <p>Fresho</p>
-        <p>${name[i]}</p>
-        <div class="basket-item-scroll-price-container d-flex align-items-center" >
-        <p class="basket-item-quantity-price" style="padding:0.2rem;margin:0">&#8377;${
-            price[i]
-        }</p>
-        <p class="basket-item-quantity-discount-price" style="margin:0">&#8377;${parseFloat(
-            (price[i] * 100) / (100 - discount[i])
-        ).toFixed(2)}</p>
-        </div>
-        <div class="basket-item-scroll-container">
-            <div class="basket-item-scroll-function">
-                <img
-                    class="basket-item-scroll-container-img"
-                    src="./images/getIt.png"
-                    alt=""
-                    style="width: 30px; height: 30px"
-                />
-                <button class="basket-item-scroll-container-back">X</button>
+    let itemTemplate = `<div class="basket-item-container">
+    <div class="basket-item">
+        <div class="basket-item-image-container">
+            <img
+                src="./images/pm${i + 1}.jpeg"
+                alt="basket Item Image"
+                class="basket-item-image"
+            />
+            <p class="basket-item-discount">${discount[i]}% OFF</p>
+            <div class="basket-item-image-type-cntr">
+                <div class="basket-item-image-type"></div>
             </div>
-            <div class="supersaverAnimation"><p>supersaver!</p></div>
-            <div class="getItem">
-                <p><b>Get it for &#8377;${price[i] - 100 / 20}</b></p>
-                <p>
-                    Buy items worth <b>&#8377;1500</b> to get this product at a
-                    supersaver price for <b>&#8377;${price[i] - 100 / 20}</b>
+        </div>
+        <div class="basket-item-detail-container">
+            <p class="basket-item-detail-brand">${brand[i]}</p>
+            <p class="basket-item-detail-name">${name[i]}</p>
+            <select
+                name="basket-item-quantity"
+                id="basket-item-detail-quantity-select"
+                class="basket-item-detail-quantity"
+            >
+                <option
+                    value="250g"
+                    class="basket-item-quantity-select-option"
+                >
+                    ${quantity[i]}
+                    <!-- <div class="basket-item-quantity-value-cntr">
+                <p class="basket-item-quantity-value">250g</p>
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div class="basket-item-quantity-detail">
+                            <div class="basket-item-quantity-discount">{
+                                discount[i]
+                            }% OFF</div>
+                            <p class="basket-item-quantity-price">{
+                                price[i]
+                            }</p>
+                            <p class="basket-item-quantity-discount-price">80</p>
+                            <button class="basket-item-quantity-button">Add</button>
+                            </div> -->
+                </option>
+            </select>
+            <div
+                class="basket-item-detail-price-cntr d-flex flex-row"
+                style="align-items: center"
+            >
+                <p
+                    class="basket-item-quantity-price"
+                    style="padding: 0.2rem; margin: 0"
+                >
+                    &#8377;${price[i]}
+                </p>
+                <p
+                    class="basket-item-quantity-discount-price"
+                    style="margin: 0"
+                >
+                    &#8377;${parseFloat(
+                        (price[i] * 100) / (100 - discount[i])
+                    ).toFixed(2)}
                 </p>
             </div>
         </div>
-    </div>
+        <div class="basket-item-offer-button">
+            <img src="/images/discount.gif" />
+            <p>Get it for &#8377;${parseFloat(price[i] - 100 / 20).toFixed(
+                2
+            )}</p>
+        </div>
+        <br />
+        <div class="basket-item-scroll-detail">
+            <p>${brand[i]}</p>
+            <p>${name[i]}</p>
+            <div
+                class="basket-item-scroll-price-container d-flex align-items-center"
+            >
+                <p
+                    class="basket-item-quantity-price"
+                    style="padding: 0.2rem; margin: 0"
+                >
+                    &#8377;${price[i]}
+                </p>
+                <p
+                    class="basket-item-quantity-discount-price"
+                    style="margin: 0"
+                >
+                    &#8377;${parseFloat((price[i] / discount[i]) * 100).toFixed(
+                        2
+                    )}
+                </p>
+            </div>
+            <div class="basket-item-scroll-container">
+                <div class="basket-item-scroll-function">
+                    <img
+                        class="basket-item-scroll-container-img"
+                        src="./images/getIt.png"
+                        alt=""
+                        style="width: 30px; height: 30px"
+                    />
+                    <button
+                        class="basket-item-scroll-container-back"
+                    >
+                        X
+                    </button>
+                </div>
+                <div class="supersaverAnimation">
+                    <p>supersaver!</p>
+                </div>
+                <div class="getItem">
+                    <p>
+                        <b>Get it for &#8377;${parseFloat(
+                            price[i] - 100 / 20
+                        ).toFixed(2)}</b>
+                    </p>
+                    <p>
+                        Buy items worth
+                        <b>&#8377;1500</b> to get this
+                        product at a supersaver price for
+                        <b>&#8377;${parseFloat(price[i] - 100 / 20).toFixed(
+                            2
+                        )}</b>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="item-count-button">
         <button class="wishlist">
@@ -749,5 +758,12 @@ function bestSeller(i) {
         </div>
     </div>
 </div>`;
-    return bestSellerHTML;
+    return itemTemplate;
 }
+
+// const basketItemOfferButton = document.querySelectorAll(
+//     ".basket-item-offer-button"
+// );
+// basketItemOfferButton.forEach((btn, index) => {
+//     if (index % 3 === 0) btn.style.display = "none";
+// });
